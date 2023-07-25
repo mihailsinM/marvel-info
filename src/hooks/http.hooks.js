@@ -1,11 +1,11 @@
-import { findAllByPlaceholderText } from "@testing-library/react";
-import { useCallback, useState } from "react";
+import { useState, useCallback } from "react";
 
 export const useHttp = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const request = useCallback(async (url, method = 'GET', body = null, headers = { 'Content-Type': 'application/json' }) => {
+
         setLoading(true);
 
         try {
@@ -19,15 +19,14 @@ export const useHttp = () => {
 
             setLoading(false);
             return data;
-
         } catch (e) {
             setLoading(false);
-            setError(e.massage);
+            setError(e.message);
             throw e;
         }
-
     }, []);
-    const clearError = useCallback(() => setError(null),[]);
 
-    return {loading, request, error, clearError};
+    const clearError = useCallback(() => setError(null), []);
+
+    return { loading, request, error, clearError }
 }

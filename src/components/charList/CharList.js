@@ -17,12 +17,13 @@ const CharList = (props) => {
 
     useEffect(() => {
         onRequest(offset, true);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onRequest = (offset, initial) => {
         initial ? setNewItemLoading(false) : setNewItemLoading(true);
         getAllCharacters(offset)
-            .then(onCharListLoaded);
+            .then(onCharListLoaded)
     }
 
     const onCharListLoaded = (newCharList) => {
@@ -56,15 +57,16 @@ const CharList = (props) => {
                     className="char__item"
                     tabIndex={0}
                     ref={el => itemRefs.current[i] = el}
-                    key={item.id}
+                    key={i}
+                    // key={item.id}
                     onClick={() => {
                         props.onCharSelected(item.id);
                         focusOnItem(i);
                     }}
                     onKeyPress={(e) => {
                         if (e.key === ' ' || e.key === "Enter") {
-                            this.props.onCharSelected(item.id);
-                            this.focusOnItem(i);
+                            props.onCharSelected(item.id);
+                            focusOnItem(i);
                         }
                     }}>
                     <img src={item.thumbnail} alt={item.name} style={imgStyle} />

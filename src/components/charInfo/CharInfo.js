@@ -15,7 +15,8 @@ const CharInfo = (props) => {
     const { loading, error, getCharacter, clearError } = useMarvelService();
 
     useEffect(() => {
-        updateChar();
+        updateChar()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.charId]);
 
     const updateChar = () => {
@@ -30,7 +31,7 @@ const CharInfo = (props) => {
 
     const onCharLoaded = (char) => {
         setChar(char);
-    }
+    };
 
 
 
